@@ -1,4 +1,4 @@
-name: Приклад GitHub Actions зі змінним середовищем
+name: Приклад GitHub Actions з секретними змінними
 
 on:
   push:
@@ -8,13 +8,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      TEST2: "some_value"
 
     steps:
     - name: Клонувати репозиторій
       uses: actions/checkout@v2
-
-    - name: Вивести значення змінної середовища TEST2
+      
+    - name: Виконати мій скрипт
       run: |
-        echo "Значення змінної середовища TEST2: $TEST2"
+        echo "Моя секретна змінна TEST1: ${{ secrets.TEST1 }}"
+        echo "Моя секретна змінна TEST2: ${{ secrets.TEST2 }}"
