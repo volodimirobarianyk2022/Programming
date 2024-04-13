@@ -19,6 +19,7 @@ jobs:
       run: |
         echo "Моя секретна змінна TEST1: ${{ secrets.TEST1 }}"
         echo "Моя секретна змінна TEST2: ${{ secrets.TEST2 }}"
+        echo ${{ env.MY_VARIABLE}}
         if [ "${{ env.MY_VARIABLE }}" = "${{ secrets.TEST1 }}" ]; then
           echo "True"
         else
