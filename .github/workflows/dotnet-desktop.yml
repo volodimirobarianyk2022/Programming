@@ -8,24 +8,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MY_VARIABLE: 123
 
     steps:
     - name: Клонувати репозиторій
       uses: actions/checkout@v2
-      
-    - name: Введення числа з клавіатури
-      id: input
-      run: |
-        echo "Введіть число:"
-        read number
-        echo "::set-output name=number::$number"
 
     - name: Виконати мій скрипт
       run: |
         echo "Моя секретна змінна TEST1: ${{ secrets.TEST1 }}"
         echo "Моя секретна змінна TEST2: ${{ secrets.TEST2 }}"
-        if [ "${{ steps.input.outputs.number }}" = "${{ secrets.TEST1 }}" ]; then
-          echo "Тру"
+        if [ "${{ env.MY_VARIABLE }}" = "${{ secrets.TEST1 }}" ]; then
+          echo "True"
         else
-          echo "Фолс"
+          echo "False"
         fi
