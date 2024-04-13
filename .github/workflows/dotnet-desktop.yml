@@ -1,4 +1,4 @@
-name: Приклад GitHub Actions з секретними змінними
+name: Приклад GitHub Actions з умовою
 
 on:
   push:
@@ -13,7 +13,19 @@ jobs:
     - name: Клонувати репозиторій
       uses: actions/checkout@v2
       
+    - name: Введення числа з клавіатури
+      id: input
+      run: |
+        echo "Введіть число:"
+        read number
+        echo "::set-output name=number::$number"
+
     - name: Виконати мій скрипт
       run: |
         echo "Моя секретна змінна TEST1: ${{ secrets.TEST1 }}"
         echo "Моя секретна змінна TEST2: ${{ secrets.TEST2 }}"
+        if [ "${{ steps.input.outputs.number }}" = "${{ secrets.TEST1 }}" ]; then
+          echo "Тру"
+        else
+          echo "Фолс"
+        fi
