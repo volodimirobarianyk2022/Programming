@@ -1,4 +1,4 @@
-name: Приклад GitHub Actions з умовою
+name: Приклад GitHub Actions зі змінним середовищем
 
 on:
   push:
@@ -9,19 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MY_VARIABLE: 123
+      TEST2: "some_value"
 
     steps:
     - name: Клонувати репозиторій
       uses: actions/checkout@v2
 
-    - name: Виконати мій скрипт
+    - name: Вивести значення змінної середовища TEST2
       run: |
-        echo "Моя секретна змінна TEST1: ${{ secrets.TEST1 }}"
-        echo "Моя секретна змінна TEST2: ${{ secrets.TEST2 }}"
-        echo ${{ env.MY_VARIABLE}}
-        if [ "${{ env.MY_VARIABLE }}" = "${{ secrets.TEST1 }}" ]; then
-          echo "True"
-        else
-          echo "False"
-        fi
+        echo "Значення змінної середовища TEST2: $TEST2"
