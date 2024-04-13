@@ -1,0 +1,19 @@
+name: Приклад GitHub Actions з секретними змінними
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Клонувати репозиторій
+      uses: actions/checkout@v2
+      
+    - name: Виконати мій скрипт
+      run: |
+        echo "Моя секретна змінна TEST1: ${{ secrets.TEST1 }}"
+        echo "Моя секретна змінна TEST2: ${{ secrets.TEST2 }}"
